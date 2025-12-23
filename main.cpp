@@ -73,7 +73,7 @@ void down1(){
 
 }
 
-void right(){
+void right1(){
     vector<int> faces = {2, 3, 4, 1};
     vector<string> vv=cube[faces.back()].back();
     for(auto &i: faces){
@@ -83,7 +83,7 @@ void right(){
     }
 }
 
-void left(){
+void left1(){
     vector<int> faces = {2, 1, 4, 3};
     vector<string> vv=cube[faces.back()].back();
     for(auto &i: faces){
@@ -91,6 +91,10 @@ void left(){
         cube[i].back() = vv;
         vv = vc;
     }
+}
+
+void up2(){
+    
 }
 
 int main(){
@@ -104,21 +108,21 @@ int main(){
     }
 
     view(cube);
-
-    up1();
-
-    view(cube);
-    down1();
-
-    view(cube);
-
-    left();
-    view(cube);
-
-    right();
-    view(cube);
     vector<pair<int,string>> moves  = {
-        {1, "U"},
-        {2, "L"}
+        {1, "L"},
+        {1, "L"},
+        {1, "L"},
+        // {1, "L"},
     };
+
+    for(auto [a, b]: moves){
+        if(a==1){
+            if(b=="U") up1();
+            if(b=="D") down1();
+            if(b=="L") left1();
+            if(b=="R") right1();
+        }
+    }
+
+    view(cube);
 }
