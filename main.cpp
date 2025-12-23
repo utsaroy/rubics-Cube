@@ -94,7 +94,53 @@ void left1(){
 }
 
 void up2(){
+    vector<int> faces = {2, 0, 4, 5};
+    Face face1 = cube[faces.back()];
+    for(int i: faces){
+        Face face2 = cube[i];
+        cube[i] = face1;
+        face1 = face2;
+    }
     
+    //right face
+    Face rightFace = cube[3];
+    cube[3][0][0] = rightFace[1][0];
+    cube[3][0][1] = rightFace[0][0];
+    cube[3][1][0] = rightFace[1][1];
+    cube[3][1][1] = rightFace[0][1];
+
+    
+    //left face
+    Face left = cube[1];
+    cube[1][0][0] = left[0][1];
+    cube[1][0][1] = left[1][1];
+    cube[1][1][0] = left[0][0];
+    cube[1][1][1] = left[1][0];
+}
+
+void down2(){
+    vector<int> faces = {2, 5, 4, 0};
+    Face face1 = cube[faces.back()];
+    for(int i: faces){
+        Face face2 = cube[i];
+        cube[i] = face1;
+        face1 = face2;
+    }
+    
+    //right face
+    Face rightFace = cube[1];
+    cube[1][0][0] = rightFace[1][0];
+    cube[1][0][1] = rightFace[0][0];
+    cube[1][1][0] = rightFace[1][1];
+    cube[1][1][1] = rightFace[0][1];
+
+    
+    //left face
+    Face left = cube[3];
+    cube[3][0][0] = left[0][1];
+    cube[3][0][1] = left[1][1];
+    cube[3][1][0] = left[0][0];
+    cube[3][1][1] = left[1][0];
 }
 
 int main(){
@@ -121,8 +167,16 @@ int main(){
             if(b=="D") down1();
             if(b=="L") left1();
             if(b=="R") right1();
+        } else{
+            if(b=="U") up2();
+            if(b=="D") down2();
+            // if(b=="L") left2();
+            // if(b=="R") right2();
         }
     }
-
+    view(cube);
+    up2();
+    view(cube);
+    down2();
     view(cube);
 }
